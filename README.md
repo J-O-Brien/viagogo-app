@@ -38,6 +38,6 @@
 		* If the required number of events have not been collected, increase the distance offset by 1, and re-calculate the valid offsets
 			* This can be achieved by calculating the positive offsets (e.g. 1,0 and 0,1) then mirroring across the X/Y axis for non-zero values
 				* e.g.	(1,0) -> mirror across Y axis -> (-1,0)
-				*		(1,1) -> mirror across X & Y & XY axis -> (1,-1) & (-1,1) & (-1,-1)
+				* (1,1) -> mirror across X & Y & XY axis -> (1,-1) & (-1,1) & (-1,-1)
 		* For reference, see larger_world_size.png included in the repository
 
