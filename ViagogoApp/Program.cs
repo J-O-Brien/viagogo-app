@@ -31,7 +31,7 @@ namespace ViagogoApp
             Console.Clear();
         }
 
-        private static bool ProcessInput(World world, string userInput)
+        private static void ProcessInput(World world, string userInput)
         {
             bool queryCellMode = false;
             int x, y;
@@ -51,17 +51,22 @@ namespace ViagogoApp
             }
             else
             {
-                if (queryCellMode)
+                try
                 {
-                    PerformCellQuery(world, x, y);
+                    if (queryCellMode)
+                    {
+                        PerformCellQuery(world, x, y);
+                    }
+                    else
+                    {
+                        PerformEventSearch(world, x, y);
+                    }
                 }
-                else
+                catch (ArgumentOutOfRangeException e)
                 {
-                    PerformEventSearch(world, x, y);
+                    Console.WriteLine(e.Message);
                 }
             }
-
-            return queryCellMode;
         }
 
         private static string CaptureInput()
@@ -75,11 +80,11 @@ namespace ViagogoApp
         }
 
         /// <summary>
-        /// 
+        /// Initiates a search of events near a given coordinate, displaying a list of nearby events, the cheapest ticket for each event and their distance from the given coordinate.
         /// </summary>
-        /// <param name="world"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="world">The world to search.</param>
+        /// <param name="x">The X coordinate to centre the search on.</param>
+        /// <param name="y">The Y coordinate to centre the search on.</param>
         private static void PerformEventSearch(World world, int x, int y)
         {
             var searchResults = world.SearchNearbyEvents(x, y);
@@ -90,17 +95,24 @@ namespace ViagogoApp
         }
 
         /// <summary>
-        /// 
+        /// Initiates a query of a coordinate, displaying the event and tickets at that coordinate.
         /// </summary>
-        /// <param name="world"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="world">The world to query.</param>
+        /// <param name="x">The X coordinate to query.</param>
+        /// <param name="y">The Y coordinate to query.</param>
         private static void PerformCellQuery(World world, int x, int y)
         {
             Cell cell = world.LocateCell(x, y);
             Console.WriteLine(cell);
         }
 
+        /// <summary>
+        /// Attempts to extract coordinate values from user input.
+        /// </summary>
+        /// <param name="userInput">The input string provided by the user.</param>
+        /// <param name="x">The output variable to store the extracted X coordinate in.</param>
+        /// <param name="y">The output variable to store the extracted Y coordinate in.</param>
+        /// <returns>Returns true if coordinate extraction succeeded, otherwise false.</returns>
         private static bool TryGetCoordinates(string userInput, out int x, out int y)
         {
             x = 0;

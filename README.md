@@ -25,6 +25,7 @@
 	* This assumption was made in order to provide a reasonable chance of events having no tickets, in order to increase the likelihood of search results including more than just adjacent cells.
 * Tickets have a minimum price of $1.00 maximum price of $99.99
 	* This assumption was made to maintain the output format for prices of `$__.__`
+* Specifying coordinates outside the bounds of the world is an invalid operation.
 
 
 # ENHANCEMENTS
