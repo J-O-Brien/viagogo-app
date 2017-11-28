@@ -18,9 +18,13 @@
 	* Select a build configuration (Release/Debug) and click Start
 
 # ASSUMPTIONS
-* The chance of an event existing in a given coordinate is 50%
+* All coordinates in the world have an event
+	* The requirements specify that each coordinate should have a maximum of 1 event, but do not specify the minimum number of events
+	* The implementation facilitates setting the chance of an event at a given coordinate, but defaults to 100%
 * An event can have a maximum of 5 tickets
+	* This assumption was made in order to provide a reasonable chance of events having no tickets, in order to increase the likelihood of search results including more than just adjacent cells.
 * Tickets have a minimum price of $1.00 maximum price of $99.99
+	* This assumption was made to maintain the output format for prices of `$__.__`
 
 
 # ENHANCEMENTS
